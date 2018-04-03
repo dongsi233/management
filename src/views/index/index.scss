@@ -1,0 +1,9 @@
+div {
+	color:lightblue;
+	/deep/ a {
+		text-decoration:none;
+		&:hover {
+			color:#000;
+		}
+	}
+}
