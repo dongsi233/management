@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from './../conponent/login.vue'
-import Home from './../conponent/home.vue'
-import Detail from './../conponent/detail.vue'
+// import Login from './components/login.vue'
+
+import Home from './components/home.vue'
+import Detail from './components/detail.vue'
+const login = () => import('./components/login.vue')
 
 Vue.use(VueRouter)
 
@@ -10,21 +12,18 @@ const routers = new VueRouter({
     routes:[
       {
           path: '/login',
-          component: Login,
+          component: login,
           name: 'login',
-          hidden: true
       },
       {
           path: '/home',
           component: Home,
-          name: 'home',
-          hidden: true 
+          name: 'home', 
       },
       {
           path: '/detail',
           component: Detail,
           name: 'detail',
-          hidden: true
       }
     
     ]
