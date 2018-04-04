@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<img src="@/assets/logo.png" alt="">
+		<img src="@/assets/image/logo.png" alt="">
 		<a href="#">hello </a>
 	</div>
 </template>
