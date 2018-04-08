@@ -2,32 +2,105 @@
 	<div>
 		
 		this is cell page
-		<a href="index.html" :class='[$style.red, $style.bold]'>go to index</a><br>
-		<a href="#" :class="{ [$style.red]: isRed, [$style.bold]: isBold }">nothing</a>
+		<!-- <a href="index.html" :class='[$style.red, $style.bold]'>go to index</a><br>
+		<a href="#" :class="{ [$style.red]: isRed, [$style.bold]: isBold }">nothing</a> -->
+
+	    <swiper :options="swiperOption">
+	        <swiper-slide v-for="slide in swiperSlides">
+	        	I'm Slide {{ slide.value }}
+				<img :src='slide.img'>
+	        </swiper-slide>
+	        <div class="swiper-pagination" slot="pagination"></div>
+	    </swiper>
+		<img src="./logo.png"> 
+		<div class="img" ></div>
+		<div class="img2" ></div>
 	</div>
 </template>
 <script type="text/javascript">
+	
+	import 'swiper/dist/css/swiper.css'
+	import { swiper, swiperSlide } from 'vue-awesome-swiper'
 	export default {
-		data () {
-			return {
-				isRed: true,
-				isBold: false
-			}
+		// data () {
+		// 	return {
+		// 		isRed: true,
+		// 		isBold: false
+		// 	}
+		// },
+		// created () {
+		// 	console.log(this.$style.red);
+		// }.
+		components: {
+		    swiper,
+		    swiperSlide
 		},
-		created () {
-			console.log(this.$style.red);
-		}
+	    data() {
+	      return {
+	        swiperOption: {
+	          pagination: {
+	            el: '.swiper-pagination'
+	          },
+	          autoplay:true,
+	          loop:true
+	        },
+	        swiperSlides: [
+	        //图片等资源路径为变量注入到dom结构时，需要用绝对地址，或者用一下require模式引用
+	        	{value:1,img:require('./logo.png')},
+	        	{value:2,img:require('./logo.png')},
+	        	{value:3,img:require('./logo.png')},
+	        	{value:4,img:require('./logo.png')},
+	        	{value:5,img:require('./logo.png')}
+	        ],
+	        // bg:require('./logo.png')
+	      }
+	    },
+	    mounted() {
+	      
+	    }    
 	}
 </script>
 <style type="scss" rel="styleSheet/sass">
-	
+	.img, .img2 {
+		width: 300px;
+		height: 300px;
+		background: url('./logo.png') no-repeat center center;
+		/*background-image: url('./logo.png') ;*/
+	}
+
+	.img2 {
+		background-image: url('./panda.jpg');
+		
+	}
+
+	.my-swiper {
+	    height: 300px;
+	    width: 100%;
+	    .swiper-slide {
+	      text-align: center;
+	      font-size: 38px;
+	      font-weight: 700;
+	      background-color: #eee;
+	      display: flex;
+	      justify-content: center;
+	      align-items: center;
+	    }
+	    .swiper-pagination {
+	      > .swiper-pagination-bullet {
+	        background-color: red;
+	      }
+	    }
+	  }
 </style>
 <style module>
-	.red {
+	
+	/*.red {
 		color:red;
 	}
 
 	.bold {
 		font-weight: bold;
-	}
+	}*/
+
+	
 </style>
