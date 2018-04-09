@@ -15,12 +15,33 @@
 		<img src="./logo.png"> 
 		<div class="img" ></div>
 		<div class="img2" ></div>
+
+		<hello></hello>
 	</div>
 </template>
 <script type="text/javascript">
-	
+	import Vue from 'vue'
 	import 'swiper/dist/css/swiper.css'
 	import { swiper, swiperSlide } from 'vue-awesome-swiper'
+
+
+	// new Vue({
+	// 	components: {
+	// 		hello : () => import('views/index/components/hello.vue')
+	// 	}
+	// })
+	
+	// Vue.component(
+	// 	'hello', 
+	// 	() => import('views/index/components/hello.vue')
+	// )
+
+	const hello = () => ({
+		component: import('views/index/components/hello.vue'),
+		delay: 200,
+		timeout: 3000
+	})
+
 	export default {
 		// data () {
 		// 	return {
@@ -34,6 +55,7 @@
 		components: {
 		    swiper,
 		    swiperSlide
+
 		},
 	    data() {
 	      return {

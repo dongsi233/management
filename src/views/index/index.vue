@@ -4,23 +4,25 @@
 	        <router-view></router-view>
 	    </transition>
 		<!-- <hello v-show='isShow'></hello> -->
-		<component :is='helloComponent' v-show='isShow'></component>
 		this is index page
 		<a href="cell.html">go to cell page</a><br>
 		<span class="iconfont icon-cart"></span>
-		<router-link to='detail'>go to detail</router-link>
-		<router-link to='login'>go to login</router-link>
-		<router-link to='home'>go to home</router-link>
-		<button @click='clickMe'>click me</button>
+		<router-link to='/detail'>go to detail</router-link>
+		<router-link to='/login'>go to login</router-link>
+		<router-link to='/'>go to home</router-link>
+		<button @click='clickMe'>click me</button><br>
+		<button @click='clickMe1'>click</button>
 		<div class="active"></div>
 		
+		
+		<component :is='helloComponent' v-show='isShow'></component>
 	</div>
 </template>
 <script type="text/javascript">
 	import '@/assets/css/iconfont.css'//加载图标字体
 	export default {
 		components:{
-			
+
 		},
 		data () {
 			return {
@@ -33,10 +35,14 @@
 			clickMe () {
 				if (this.isLoadHello) {
 					const hello = () =>import('./components/hello.vue');
+
 					this.helloComponent = hello;
 					this.isLoadHello = false;
 				}
 				this.isShow = !this.isShow;
+			},
+			clickMe1 () {
+				
 			}
 		}
 	}
@@ -51,6 +57,7 @@
 		}	
 	}
 
+	
 
 	.active {
 		width: 200px;
