@@ -54,8 +54,8 @@
 		// }.
 		components: {
 		    swiper,
-		    swiperSlide
-
+		    swiperSlide,
+		    hello
 		},
 	    data() {
 	      return {
