@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<transition name="slide-fade">
+		<transition name="fade">
 	        <router-view></router-view>
 	    </transition>
 		<!-- <hello v-show='isShow'></hello> -->
@@ -64,15 +64,24 @@
 		height: 200px;
 	}
 
-	.slide-fade-enter-active {
-	  transition: all .3s ease;
+	// .slide-fade-enter-active {
+	//   transition: all .3s ease;
+	// }
+	// .slide-fade-leave-active {
+	//   transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+	//   // transition: all .3s linear;
+	// }
+	// .slide-fade-enter, .slide-fade-leave-active {
+	//   transform: translateX(100%);
+	//   opacity: 0;
+	// }
+	.fade-enter-active,
+	.fade-leave-active {
+		transition: all .2s ease;
 	}
-	.slide-fade-leave-active {
-	  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-	  // transition: all .3s linear;
-	}
-	.slide-fade-enter, .slide-fade-leave-active {
-	  transform: translateX(100%);
-	  opacity: 0;
+
+	.fade-enter,
+	.fade-leave-active {
+		opacity: 0;
 	}
 </style>

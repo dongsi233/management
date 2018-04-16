@@ -36,11 +36,11 @@
 	// 	() => import('views/index/components/hello.vue')
 	// )
 
-	const hello = () => ({
-		component: import('views/index/components/hello.vue'),
-		delay: 200,
-		timeout: 3000
-	})
+	// const hello = () => ({
+	// 	component: import('views/index/components/hello.vue'),
+	// 	delay: 2000,
+	// 	timeout: 3000
+	// })
 
 	export default {
 		// data () {
@@ -54,8 +54,33 @@
 		// }.
 		components: {
 		    swiper,
-		    swiperSlide
+		    swiperSlide,
+		    hello: () => import('views/index/components/hello.vue').then(component => {
+		    	// 清理已缓存的组件定义
+  	      component.default._Ctor = {}
 
+  	      if (!component.default.attached) {
+  	        // 保存原组件中的 created 生命周期函数
+  	        component.default.backupCreated = component.default.created
+  	      }
+
+  	      // 注入一个特殊的 created 生命周期函数
+  	      component.default.created = function() {
+  	        // 子组件已经实例化完毕
+
+  	        // this 即为子组件 vm 实例
+  	        console.log(this)
+
+  	        if (component.default.backupCreated) {
+  	          // 执行原组件中的 created 生命周期函数
+  	          component.default.backupCreated.call(this)
+  	        }
+  	      }
+
+  	      // 表示已经注入过了 
+  	      component.default.attached = true
+		    	return component
+		    })
 		},
 	    data() {
 	      return {
