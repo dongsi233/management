@@ -1,11 +1,14 @@
 <template>
 	<div>
 		<transition name="fade">
-	        <router-view></router-view>
-	    </transition>
+			<keep-alive>
+	        	<router-view></router-view>
+			</keep-alive>
+	  </transition>
 		<!-- <hello v-show='isShow'></hello> -->
 		this is index page
 		<a href="cell.html">go to cell page</a><br>
+		<a href="userCenter.html">go to userCenter page</a><br>
 		<span class="iconfont icon-cart"></span>
 		<router-link to='/detail'>go to detail</router-link>
 		<router-link to='/login'>go to login</router-link>
@@ -13,13 +16,17 @@
 		<button @click='clickMe'>click me</button><br>
 		<button @click='clickMe1'>click</button>
 		<div class="active"></div>
-		
+		<p>
+			{{ name }}
+		</p>
 		
 		<component :is='helloComponent' v-show='isShow'></component>
 	</div>
 </template>
 <script type="text/javascript">
 	import '@/assets/css/iconfont.css'//加载图标字体
+	// import axios from 'axios'
+
 	export default {
 		components:{
 
@@ -28,11 +35,13 @@
 			return {
 				isShow:false,
 				helloComponent:'',
-				isLoadHello:true
+				isLoadHello:true,
+				name:''
 			}
 		},
 		methods: {
 			clickMe () {
+				let self = this;
 				if (this.isLoadHello) {
 					const hello = () =>import('./components/hello.vue');
 
@@ -40,6 +49,11 @@
 					this.isLoadHello = false;
 				}
 				this.isShow = !this.isShow;
+				this.$http.get('./static/data/data.json').then(response => {
+					self.name = response.data.name;
+				}).catch(err => {
+					console.log(err);
+				})
 			},
 			clickMe1 () {
 				

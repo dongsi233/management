@@ -11,16 +11,13 @@
 	export default {
 		methods: {
 			change () {
-				console.log(this.routers);
+				console.log(this.$route);
 
 			}
 		},
 		watch : {
 			'$route' (to, from) {
-			    console.log(to);
-			    console.log(from)
-			    console.log(this.$route)
-			    
+			     
 			}
 		}
 	}
