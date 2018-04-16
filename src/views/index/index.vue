@@ -1,12 +1,14 @@
 <template>
 	<div>
 		<transition name="slide-fade">
-	        <router-view></router-view>
+			<keep-alive>
+	        	<router-view></router-view>
+			</keep-alive>
 	    </transition>
 		<!-- <hello v-show='isShow'></hello> -->
 		this is index page
 		<a href="cell.html">go to cell page</a><br>
-		<a href="useCenter.html">go to userCenter page</a><br>
+		<a href="userCenter.html">go to userCenter page</a><br>
 		<span class="iconfont icon-cart"></span>
 		<router-link to='/detail'>go to detail</router-link>
 		<router-link to='/login'>go to login</router-link>

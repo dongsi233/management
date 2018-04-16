@@ -4,9 +4,12 @@
 		<header>
 			<nav>
 				<ul>
-					<li>home</li>
-					<li>about</li>
-					<li>contact</li>
+					<!-- <li>home</li> -->
+					<router-link to='' tag='li'>home</router-link>
+					<router-link to='' tag='li'>about</router-link>
+					<router-link to='' tag='li'>contact</router-link>
+					<!-- <li>about</li>
+					<li>contact</li> -->
 				</ul>
 			</nav>
 			<button>login</button>

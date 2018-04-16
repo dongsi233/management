@@ -6,7 +6,7 @@ import flex from './component/flex.vue'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
-	mode: 'history',
+	// mode: 'history', //为什么不能两个都设置为一样
 	
 	routes: [
 		{
