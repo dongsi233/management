@@ -14,13 +14,17 @@
 		<button @click='clickMe'>click me</button><br>
 		<button @click='clickMe1'>click</button>
 		<div class="active"></div>
-		
+		<p>
+			{{ name }}
+		</p>
 		
 		<component :is='helloComponent' v-show='isShow'></component>
 	</div>
 </template>
 <script type="text/javascript">
 	import '@/assets/css/iconfont.css'//加载图标字体
+	// import axios from 'axios'
+
 	export default {
 		components:{
 
@@ -29,11 +33,13 @@
 			return {
 				isShow:false,
 				helloComponent:'',
-				isLoadHello:true
+				isLoadHello:true,
+				name:''
 			}
 		},
 		methods: {
 			clickMe () {
+				let self = this;
 				if (this.isLoadHello) {
 					const hello = () =>import('./components/hello.vue');
 
@@ -41,6 +47,11 @@
 					this.isLoadHello = false;
 				}
 				this.isShow = !this.isShow;
+				this.$http.get('./static/data/data.json').then(response => {
+					self.name = response.data.name;
+				}).catch(err => {
+					console.log(err);
+				})
 			},
 			clickMe1 () {
 				
