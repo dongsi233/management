@@ -55,7 +55,7 @@
 		components: {
 		    swiper,
 		    swiperSlide,
-		    hello,
+		    
 		    hello: () => import('views/index/components/hello.vue').then(component => {
 		    	// 清理已缓存的组件定义
   	      component.default._Ctor = {}
