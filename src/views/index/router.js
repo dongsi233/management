@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import Login from './components/login.vue'
-
-import Home from './components/home.vue'
-import Detail from './components/detail.vue'
+import { InputNumber } from 'element-ui';
+import { WSAEINVALIDPROVIDER } from 'constants';
 const login = () => import('./components/login.vue')
 
 Vue.use(VueRouter)
@@ -48,29 +46,11 @@ const routers = new VueRouter({
       },
       {
           path: '',
-          component: Home,
+          component: () => import('./components/home.vue'),
           name: 'home', 
-      },
-      {
-          path: '/detail',
-          component: Detail,
-          name: 'detail',
-          children: [
-            {
-              path:'',
-              name: 'detail1',
-              component: () => import('./components/detail1.vue')
-            },
-            {
-              path: 'detail2',
-              name: 'detail2',
-              component: () => import('./components/detail2.vue')
-            }
-          ]
       }
     
     ]
 })
-
 
 export default routers;
