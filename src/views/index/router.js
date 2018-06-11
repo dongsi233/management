@@ -3,6 +3,12 @@ import VueRouter from 'vue-router'
 import { InputNumber } from 'element-ui';
 import { WSAEINVALIDPROVIDER } from 'constants';
 const login = () => import('./components/login.vue')
+const home = () => import('./components/home.vue')
+const table = () => import('./components/table.vue')
+const table1 = () => import('./components/table1.vue')
+const table2 = () => import('./components/table2.vue')
+const table3 = () => import('./components/table3.vue')
+
 
 Vue.use(VueRouter)
 
@@ -43,11 +49,27 @@ const routers = new VueRouter({
           path: '/login',
           component: login,
           name: 'login',
+          hidden:true
       },
       {
-          path: '',
-          component: () => import('./components/home.vue'),
-          name: 'home', 
+          path: '/',
+          component: home,
+          name: '设置',
+          icon: 'iconfont icon-cart',
+          children: [
+            {path:'/table', component: table, name: 'Table'},
+            {path:'/table1', component: table1, name: 'Table1'}
+          ]
+      },
+      {
+          path: '/',
+          component: home,
+          name: '用户中心',
+          icon: 'iconfont icon-accountfilling',
+          children: [
+            {path:'/table2', component: table2, name: 'Table2'},
+            {path:'/table3', component: table3, name: 'Table3'}
+          ]
       }
     
     ]
