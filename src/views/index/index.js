@@ -9,19 +9,21 @@ Vue.use(ElementUI)
 Vue.prototype.$http = axios
 
 
-// router.beforeEach((to, from, next) => {
-//   console.log(to)
-//   // NProgress.start();
-//   if (to.path == '/login') {
-//     sessionStorage.removeItem('user');
-//   }
-//   let user = JSON.parse(sessionStorage.getItem('user'));
-//   if (!user && to.path != '/login') {
-//     next({ path: '/login' })
-//   } else {
-//     next()
-//   }
-// })
+router.beforeEach((to, from, next) => {
+  console.log(to)
+  debugger;
+  // NProgress.start();
+  if (to.path == '/login') {
+    sessionStorage.removeItem('user');
+  }
+  //let user = JSON.parse(sessionStorage.getItem('user'));
+  let user = sessionStorage.getItem('user');
+  if (!user && to.path != '/login') {
+    next({ path: '/login' })
+  } else {
+    next()
+  }
+})
 
 new Vue({
 	el: '#app',

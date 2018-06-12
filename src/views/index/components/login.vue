@@ -54,7 +54,9 @@
 				this.isLoding = true;
 				this.$refs.loginForm1.validate((valid) => {
 					if (valid) {
+						sessionStorage.setItem('user',this.loginForm.userName);
 						this.$router.push('/');
+
 					} else {
 						this.isLoding = false;
 					}

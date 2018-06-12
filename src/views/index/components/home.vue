@@ -1,38 +1,96 @@
 <template>
-	<div>
-		<div>this is home page</div>
-		<ul>
-		  <li v-for="img in list">
-		    <img src="" v-lazy="img.src" >
-		  </li>
-		</ul>
-	</div>
+	<el-row class="container">
+		<el-row class="header">
+			<el-col :span="isCollapse?1:4">{{ isCollapse ? "":"系统管理" }}</el-col>
+			<el-col :span="5">
+				<el-button type="text" @click="showSider">
+					<i class="iconfont icon-folder" style="color:#fff"></i>
+				</el-button>
+			</el-col>
+			<el-col :span="12">
+				
+			</el-col>
+		</el-row>
+		<el-row class="main">
+			<aside>
+				<el-menu mode="vertical" class="menu-collapse" :default-active="$route.path" @select="handleSelect" router unique-opened :collapse="isCollapse">
+					<el-submenu v-for="(submenus, index) in $router.options.routes"
+						:index="index + ''"
+						:key="submenus.index" v-if="!submenus.hidden">
+						<template slot="title"><i :class="submenus.icon" class="submenu_icon"></i>{{ submenus.name }}</template>
+						<el-menu-item v-for="(item, subIndex) in submenus.children"
+							:index="item.path" :key="item.path" :class="subIndex == submenus.children.length-1?'': 'submenuClass'">
+								{{item.name}}
+						</el-menu-item>
+					</el-submenu>
+				</el-menu>
+				
+			</aside>
+			<section>
+				<router-view/>
+			</section>
+		</el-row>
+		
+	</el-row>
 </template>
 <script>
-	import Vue from 'vue'
-	import Vuelazyload from 'vue-lazyload'
-
-	Vue.use(Vuelazyload)
-
-	Vue.use(Vuelazyload, {
-	  preLoad: 1.3,
-	  // error: require('@/assets/image/logo.png'),
-	  loading: require('@/assets/image/logo.png'),
-	  attempt: 1
-	})
-
-	export default {
-		data () {
-			return {
-				list: [
-					{src:require('@/assets/image/panda.jpg')},
-					{src:require('@/assets/image/panda.jpg')},
-					{src:require('@/assets/image/panda.jpg')}
-				]
-			}
+export default {
+	data () {
+		return {
+			isCollapse:false
+		}
+	},
+	beforeCreate () {
+		console.log(this.$router);
+		console.log(this.$route);
+		console.log(this.$router.options.routes);
+	},
+	methods: {
+		showSider () {
+			this.isCollapse = !this.isCollapse;
+		},
+		handleSelect (index, indexPath)　{
+			console.log(indexPath);
+			console.log(index);
 		}
 	}
+}
 </script>
-<style lang='scss'>
+<style lang="scss" scoped>
+	@import '~vars';
+
+	.submenuClass {
+		border-bottom: 1px solid #ddd;
+	}
+
+	.menu-collapse:not(.el-menu--collapse) {
+    width: 200px;
+    
+	}
 	
+	.container {
+		.header {
+			background:$blueColor;
+			//line-height: 34px;
+			display: flex;
+			
+			color: $fontWhite;
+			padding:0 20px;
+			div {
+				align-self: center;
+			}
+		}
+	
+	.main {
+		display: flex;
+		aside {
+			overflow: hidden;
+			.submenu_icon {
+				font-size: 25px;
+				margin-right: 20px;
+			}
+			//flex:0 0 200px;
+		}
+	}
+	}
 </style>
