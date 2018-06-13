@@ -19,10 +19,10 @@
 					<el-submenu v-for="(submenus, index) in $router.options.routes"
 						:index="index + ''"
 						:key="submenus.index" v-if="!submenus.hidden">
-						<template slot="title"><i :class="submenus.icon" class="submenu_icon"></i>{{ submenus.name }}</template>
+						<template slot="title"><i :class="submenus.icon" class="submenu_icon"></i>{{ submenus.title }}</template>
 						<el-menu-item v-for="(item, subIndex) in submenus.children"
 							:index="item.path" :key="item.path" :class="subIndex == submenus.children.length-1?'': 'submenuClass'">
-								{{item.name}}
+								{{item.title}}
 						</el-menu-item>
 					</el-submenu>
 				</el-menu>

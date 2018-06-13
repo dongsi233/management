@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import { InputNumber } from 'element-ui';
-import { WSAEINVALIDPROVIDER } from 'constants';
-const login = () => import('./components/login.vue')
-const home = () => import('./components/home.vue')
-const table = () => import('./components/table.vue')
-const table1 = () => import('./components/table1.vue')
-const table2 = () => import('./components/table2.vue')
-const table3 = () => import('./components/table3.vue')
+import { InputNumber } from 'element-ui'
+import { WSAEINVALIDPROVIDER } from 'constants'
+//const login = () => import('./components/login.vue')
+// const home = () => import('./components/home.vue')
+// const table = () => import('./components/table.vue')
+// const table1 = () => import('./components/table1.vue')
+// const table2 = () => import('./components/table2.vue')
+// const table3 = () => import('./components/table3.vue')
 
 
 Vue.use(VueRouter)
@@ -47,30 +47,30 @@ const routers = new VueRouter({
     routes:[
       {
           path: '/login',
-          component: login,
+          component: () => import('./components/login.vue'),
           name: 'login',
-          hidden:true
+          hidden: true,
       },
-      {
-          path: '/',
-          component: home,
-          name: '设置',
-          icon: 'iconfont icon-cart',
-          children: [
-            {path:'/table', component: table, name: 'Table'},
-            {path:'/table1', component: table1, name: 'Table1'}
-          ]
-      },
-      {
-          path: '/',
-          component: home,
-          name: '用户中心',
-          icon: 'iconfont icon-accountfilling',
-          children: [
-            {path:'/table2', component: table2, name: 'Table2'},
-            {path:'/table3', component: table3, name: 'Table3'}
-          ]
-      }
+      // {
+      //     path: '/',
+      //     component: home,
+      //     name: '设置',
+      //     icon: 'iconfont icon-cart',
+      //     children: [
+      //       {path:'/table', component: table, name: 'Table'},
+      //       {path:'/table1', component: table1, name: 'Table1'}
+      //     ]
+      // },
+      // {
+      //     path: '/',
+      //     component: home,
+      //     name: '用户中心',
+      //     icon: 'iconfont icon-accountfilling',
+      //     children: [
+      //       {path:'/table2', component: table2, name: 'Table2'},
+      //       {path:'/table3', component: table3, name: 'Table3'}
+      //     ]
+      // }
     
     ]
 })
