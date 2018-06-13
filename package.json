@@ -15,7 +15,8 @@
     "vux": "^2.2.2",
     "element-ui": "^2.3.3",
     "vue-awesome-swiper": "^3.1.3",
-    "vue-lazyload": "^1.2.2"
+    "vue-lazyload": "^1.2.2",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

@@ -3,11 +3,13 @@
 		<el-row class="header">
 			<el-col :span="isCollapse?1:4">{{ isCollapse ? "":"系统管理" }}</el-col>
 			<el-col :span="5">
-				<el-button type="text" @click="showSider">
+				<el-button type="text" @click="showSider(3)">
 					<i class="iconfont icon-folder" style="color:#fff"></i>
+					{{ getCount + getRoutesLength }}
 				</el-button>
 			</el-col>
 			<el-col :span="12">
+				<el-input v-model="count" placeholder=""></el-input>
 				
 			</el-col>
 		</el-row>
@@ -34,10 +36,13 @@
 	</el-row>
 </template>
 <script>
+import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
+
 export default {
 	data () {
 		return {
-			isCollapse:false
+			isCollapse:false,
+			aa:'ccc'
 		}
 	},
 	beforeCreate () {
@@ -45,18 +50,52 @@ export default {
 		console.log(this.$route);
 		console.log(this.$router.options.routes);
 	},
+	computed:{
+		getCount () {
+			return this.aa
+		},
+		// ...mapState({
+		// 		count: state => state.count
+		// })
+		...mapState([
+			'count'
+		]),
+		...mapGetters([
+			'getRoutesLength'
+		]),
+		
+	},
 	methods: {
-		showSider () {
+		showSider (n) {
+			debugger;
 			this.isCollapse = !this.isCollapse;
+			//this.addCount(n);
+			// this.$store.dispatch({
+			// 	type: 'incrementAsync',
+			// 	n
+			// });
+			this.$store.dispatch('incrementAsync', {
+				amount:n
+			})
+			// this.$http.post('',{}).then( res => {
+			// 	console.log(res)
+			// })
 		},
 		handleSelect (index, indexPath)　{
 			console.log(indexPath);
 			console.log(index);
-		}
+		},
+		...mapMutations({
+			addCount:'increment'
+		}),
+		...mapActions([
+			'incrementAsync'
+		])
 	}
 }
 </script>
 <style lang="scss" scoped>
+	//@import '~commonCss';
 	@import '~vars';
 
 	.submenuClass {

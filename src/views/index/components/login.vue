@@ -52,9 +52,16 @@
 		methods: {
 			userLogin () {
 				this.isLoding = true;
+				var self = this;
 				this.$refs.loginForm1.validate((valid) => {
 					if (valid) {
+						
 						sessionStorage.setItem('user',this.loginForm.userName);
+						// this.$http.get('http://127.0.0.1:8000',{userName:self.loginForm.userName,pwd:self.loginForm.pwd}).then(res => {
+						// 	console.log(res.data.routeData);
+							
+						// })
+						//sessionStorage.setItem('routeData')
 						this.$router.push('/');
 
 					} else {

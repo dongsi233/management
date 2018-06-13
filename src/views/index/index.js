@@ -4,6 +4,8 @@ import router from './router.js'
 import axios from 'axios'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import 'commonCss'
+import store from './vuex/store.js'
 
 Vue.use(ElementUI)
 Vue.prototype.$http = axios
@@ -11,7 +13,6 @@ Vue.prototype.$http = axios
 
 router.beforeEach((to, from, next) => {
   console.log(to)
-  debugger;
   // NProgress.start();
   if (to.path == '/login') {
     sessionStorage.removeItem('user');
@@ -28,6 +29,7 @@ router.beforeEach((to, from, next) => {
 new Vue({
 	el: '#app',
 	router,
+	store,
 	template: '<index/>',
 	components: { index }
 })

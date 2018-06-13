@@ -8,7 +8,7 @@
 		<button @click="uploadfile">上传</button>
 		<div id="resMsg"></div>
 		<div id="showImg" v-if="imgContent.length > 0">
-			<div class="item" v-for="(image, key) in imgContent">
+			<div class="item" v-for="(image, key) in imgContent" :key="key">
 				<!-- <p>{{ image.name }}</p> -->
 				<input type="text" v-model="image.name" name="">
 				<span @click="delImg(key)">删除{{ key }}</span>
