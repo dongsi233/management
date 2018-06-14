@@ -1,8 +1,8 @@
 
 function lazy (name) {
-    debugger;
-    //let rname = `components/${name}.vue`;
-    return () => import (`../components/${name}.vue`)
+    let rname = `components/${name}.vue`;
+    //return () => import (`../components/${name}.vue`)
+    return () => import('../' + rname);
 }
 
-export {lazy}
+export default lazy

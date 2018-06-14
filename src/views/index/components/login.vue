@@ -68,13 +68,13 @@
 				var self = this;
 				this.$refs.loginForm1.validate((valid) => {
 					if (valid) {
-						this.$http.get('http://127.0.0.1:8000',{userName:self.loginForm.userName,pwd:self.loginForm.pwd}).then(res => {
+						debugger;
+						this.$http.post('',{userName:self.loginForm.userName,pwd:self.loginForm.pwd}).then(res => {
 							console.log(res.data.routeData);
 							let routeData = res.data.routeData;
 							//let routeDatas = this.handleChildren(routeData)
 							sessionStorage.setItem('routeDatas', JSON.stringify(routeData));
 							//console.log(routeDatas);
-							debugger;
 							//this.$router.options.routes = [...this.$router.options.routes,...routeDatas];
 							sessionStorage.setItem('user',this.loginForm.userName);
 							
