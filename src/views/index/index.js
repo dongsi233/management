@@ -10,6 +10,16 @@ import store from './vuex/store.js'
 Vue.use(ElementUI)
 Vue.prototype.$http = axios
 
+//手动刷新时路由会被重置，所以需要从sessionStorage里面拿到路由，并重新新增
+if(sessionStorage.getItem('user')){
+  debugger;
+  let routes = JSON.parse(sessionStorage.getItem('routeDatas'));
+  store.dispatch('add_Routesss', routes);
+  //router.options.routes = [...router.options.routes,...routes];
+  console.log(router.options.routes);
+  //router.addRoutes(routes);
+  //router.push('/');
+}
 
 router.beforeEach((to, from, next) => {
   console.log(to)
@@ -18,6 +28,8 @@ router.beforeEach((to, from, next) => {
     sessionStorage.removeItem('user');
   }
   //let user = JSON.parse(sessionStorage.getItem('user'));
+ 
+
   let user = sessionStorage.getItem('user');
   if (!user && to.path != '/login') {
     next({ path: '/login' })

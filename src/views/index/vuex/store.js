@@ -1,13 +1,16 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import SOME_MUTATION from './moutation_type'
+import ADD_ROUTES from './moutation_type'
+import menufilter from './menufilter'
+import router from '../router';
 
 Vue.use(Vuex)
 
 
 const state = {
 	count:0,
-	Routers: []
+	Routers: [],
+	routeDatas: []
 }
 
 const getters = {
@@ -20,6 +23,12 @@ const mutations = {
 
 	increment (state, n) {
 		state.count += n
+	},
+	ADD_ROUTES (state, addrouter) {
+		let routes = [];
+		menufilter(routes, addrouter);
+		router.addRoutes(routes);
+		router.push('/');
 	}
 }
 
@@ -29,11 +38,13 @@ const actions = {
 		setTimeout(() => {
 			commit('increment', payload.amount)
 		}, 1000);
+	},
+	add_Routesss ({commit}, addrouter) {
+		commit('ADD_ROUTES', addrouter);
 	}
 }
 
 
 export default new Vuex.Store({
-	debug: true,
 	state,getters,mutations,actions
 })

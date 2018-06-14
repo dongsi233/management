@@ -17,6 +17,8 @@
 <script type="text/javascript">
 	
 	import '@/assets/css/iconfont.css';
+	import { mapActions } from 'vuex';
+
 	export default {
 		data () {
 			let checkUser = (rule, value, callback) => {
@@ -50,9 +52,11 @@
 			}
 		},
 		methods: {
+			...mapActions({add_Routes:'add_Routesss'}),
+
 			handleChildren (menuData) {
 				for(var i=0; i < menuData.length; i++){
-					let comName = menuData[i].name + '.vue';
+					let comName = menuData[i].component + '.vue';
 					let component = () => import('./'+comName);
 					menuData[i].component = component;
 					menuData[i].children && this.handleChildren(menuData[i].children);
@@ -64,16 +68,19 @@
 				var self = this;
 				this.$refs.loginForm1.validate((valid) => {
 					if (valid) {
-						
-						sessionStorage.setItem('user',this.loginForm.userName);
 						this.$http.get('http://127.0.0.1:8000',{userName:self.loginForm.userName,pwd:self.loginForm.pwd}).then(res => {
 							console.log(res.data.routeData);
 							let routeData = res.data.routeData;
-							let routeDatas = this.handleChildren(routeData)
-							console.log(routeDatas);
-							this.$router.options.routes = [...this.$router.options.routes,...routeDatas];
-							this.$router.addRoutes(routeDatas);
-							this.$router.push('/');
+							//let routeDatas = this.handleChildren(routeData)
+							sessionStorage.setItem('routeDatas', JSON.stringify(routeData));
+							//console.log(routeDatas);
+							debugger;
+							//this.$router.options.routes = [...this.$router.options.routes,...routeDatas];
+							sessionStorage.setItem('user',this.loginForm.userName);
+							
+							//this.$router.addRoutes(routeDatas);
+							//this.$router.push('/');
+							this.add_Routes(routeData);
 						})
 
 					} else {

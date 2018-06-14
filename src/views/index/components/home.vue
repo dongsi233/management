@@ -16,7 +16,7 @@
 		<el-row class="main">
 			<aside>
 				<el-menu mode="vertical" class="menu-collapse" :default-active="$route.path" @select="handleSelect" router unique-opened :collapse="isCollapse">
-					<el-submenu v-for="(submenus, index) in $router.options.routes"
+					<el-submenu v-for="(submenus, index) in currentData"
 						:index="index + ''"
 						:key="submenus.index" v-if="!submenus.hidden">
 						<template slot="title"><i :class="submenus.icon" class="submenu_icon"></i>{{ submenus.title }}</template>
@@ -42,13 +42,20 @@ export default {
 	data () {
 		return {
 			isCollapse:false,
-			aa:'ccc'
+			aa:'ccc',
+			user:'',
+			currentData:[]
 		}
 	},
 	beforeCreate () {
 		console.log(this.$router);
 		console.log(this.$route);
 		console.log(this.$router.options.routes);
+	},
+	created () {
+		this.user = sessionStorage.getItem('user');
+		this.currentData = JSON.parse(sessionStorage.getItem('routeDatas'));
+		console.log(this.currentData);
 	},
 	computed:{
 		getCount () {

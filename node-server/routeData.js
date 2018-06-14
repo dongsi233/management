@@ -1,7 +1,7 @@
 
 const item1 = {
     path: '/',
-    //component: home,
+    component: 'home',
     name: 'home',
     title: '设置',
     icon: 'iconfont icon-cart',
@@ -10,13 +10,13 @@ const item1 = {
         {
             path:'/table',
             title: 'Table',
-            //component: table,
+            component: 'table',
             name: 'table'
         },
         {
             path:'/table1', 
             title: 'Table1',
-            //component: table1, 
+            component: 'table1', 
             name: 'table1'
         }
     ]
@@ -24,7 +24,7 @@ const item1 = {
 
 const item2 = {
     path: '/',
-    //component: home,
+    component: 'home',
     name: 'home',
     title: '用户中心',
     icon: 'iconfont icon-accountfilling',
@@ -33,13 +33,13 @@ const item2 = {
         {
             path:'/table2',
             title: 'Table2',
-            //component: table2,
+            component: 'table2',
             name: 'table2'
         },
         {
             path:'/table3', 
             title: 'Table3',
-            //component: table3, 
+            component: 'table3', 
             name: 'table3'
         }
     ]
