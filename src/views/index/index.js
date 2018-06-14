@@ -9,7 +9,7 @@ import 'commonCss'
 import store from './vuex/store.js'
 
 Vue.use(ElementUI)
-
+Vue.prototype.$http = axios;
 
 //手动刷新时路由会被重置，所以需要从sessionStorage里面拿到路由，并重新新增
 if(sessionStorage.getItem('user')){

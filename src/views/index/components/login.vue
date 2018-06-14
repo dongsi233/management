@@ -69,7 +69,7 @@
 				this.$refs.loginForm1.validate((valid) => {
 					if (valid) {
 						debugger;
-						this.$http.post('',{userName:self.loginForm.userName,pwd:self.loginForm.pwd}).then(res => {
+						this.$http.post('/',{userName:self.loginForm.userName,pwd:self.loginForm.pwd}).then(res => {
 							console.log(res.data.routeData);
 							let routeData = res.data.routeData;
 							//let routeDatas = this.handleChildren(routeData)
