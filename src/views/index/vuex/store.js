@@ -34,7 +34,6 @@ const mutations = {
 
 const actions = {
 	incrementAsync ({ commit }, payload) {
-		debugger
 		setTimeout(() => {
 			commit('increment', payload.amount)
 		}, 1000);

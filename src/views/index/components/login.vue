@@ -68,18 +68,24 @@
 				var self = this;
 				this.$refs.loginForm1.validate((valid) => {
 					if (valid) {
-						debugger;
-						this.$http.post('/',{userName:self.loginForm.userName,pwd:self.loginForm.pwd}).then(res => {
-							console.log(res.data.routeData);
+						// this.$http.post('/',{userName:self.loginForm.userName,pwd:self.loginForm.pwd}).then(res => {
+						// 	console.log(res.data.routeData);
+						// 	let routeData = res.data.routeData;
+						// 	sessionStorage.setItem('routeDatas', JSON.stringify(routeData));
+						// 	sessionStorage.setItem('user',this.loginForm.userName);
+						// 	this.add_Routes(routeData);
+						// })
+						this.$http({
+							url: '/',
+							method: 'post',
+							data: {
+								userName: self.loginForm.userName,
+								pwd: self.loginForm.pwd
+							}
+						}).then( res => {
 							let routeData = res.data.routeData;
-							//let routeDatas = this.handleChildren(routeData)
 							sessionStorage.setItem('routeDatas', JSON.stringify(routeData));
-							//console.log(routeDatas);
-							//this.$router.options.routes = [...this.$router.options.routes,...routeDatas];
 							sessionStorage.setItem('user',this.loginForm.userName);
-							
-							//this.$router.addRoutes(routeDatas);
-							//this.$router.push('/');
 							this.add_Routes(routeData);
 						})
 
@@ -88,7 +94,13 @@
 					}
 				})
 			}
-		}
+		},
+		// beforeRouteEnter (to, from, next) {
+		// 	// if( from.name == 'home') {
+
+		// 	// }
+		// 	next();
+		// }
 	}
 </script>
 <style lang="scss" scoped>

@@ -8,10 +8,27 @@
 					{{ getCount + getRoutesLength }}
 				</el-button>
 			</el-col>
-			<el-col :span="12">
+			<!-- <el-col :span="12">
 				<el-input v-model="count" placeholder=""></el-input>
 				
+			</el-col> -->
+			<el-col :span="5">
+				<el-dropdown trigger="hover" @command="drophandle">
+					<!-- <span class="portrait">
+						
+					</span> -->
+					<el-button circle>下拉</el-button>
+					<el-dropdown-menu slot="dropdown">
+						<el-dropdown-item v-for="item in items"
+							:key="item.key" :command="item.command" :divided="true">
+							{{item.title}}
+						</el-dropdown-item>
+					</el-dropdown-menu>
+				</el-dropdown>
+				<el-button type="primary" @click="cancellation">退出</el-button>
+				
 			</el-col>
+			
 		</el-row>
 		<el-row class="main">
 			<aside>
@@ -29,11 +46,13 @@
 				
 			</aside>
 			<section>
-				<router-view/>
+				<router-view></router-view>
 			</section>
 		</el-row>
 		
 	</el-row>
+	
+	
 </template>
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
@@ -44,7 +63,11 @@ export default {
 			isCollapse:false,
 			aa:'ccc',
 			user:'',
-			currentData:[]
+			currentData:[],
+			items: [
+				{title:'注销', command: 'cancellation'},
+				{title:'我的账号', command: 'account'},
+			]
 		}
 	},
 	beforeCreate () {
@@ -74,7 +97,6 @@ export default {
 	},
 	methods: {
 		showSider (n) {
-			debugger;
 			this.isCollapse = !this.isCollapse;
 			//this.addCount(n);
 			// this.$store.dispatch({
@@ -97,7 +119,26 @@ export default {
 		}),
 		...mapActions([
 			'incrementAsync'
-		])
+		]),
+		drophandle (command) {
+			//this.$alert(command);
+			if(command === 'cancellation') {
+				this.$alert("确定要注销吗？", "注销", {
+					confirmButtonText: '注销',
+					callback: (action) => {
+						if(action === 'confirm') {
+							sessionStorage.removeItem('user');
+							sessionStorage.removeItem('routeDatas');
+							this.$router.push('/login');
+						}
+					}
+				})
+			}
+		}
+	},
+	beforeRouteLeave (to, from, next) {
+		//console.log(to);
+		next();
 	}
 }
 </script>
@@ -110,7 +151,7 @@ export default {
 	}
 
 	.menu-collapse:not(.el-menu--collapse) {
-    width: 200px;
+    	width: 200px;
     
 	}
 	
@@ -127,16 +168,19 @@ export default {
 			}
 		}
 	
-	.main {
-		display: flex;
-		aside {
-			overflow: hidden;
-			.submenu_icon {
-				font-size: 25px;
-				margin-right: 20px;
+		.main {
+			display: flex;
+			aside {
+				overflow: hidden;
+				.submenu_icon {
+					font-size: 25px;
+					margin-right: 20px;
+				}
+				//flex:0 0 200px;
 			}
-			//flex:0 0 200px;
+			.portrait {
+
+			}
 		}
-	}
 	}
 </style>
