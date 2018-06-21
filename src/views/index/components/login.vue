@@ -87,6 +87,9 @@
 							sessionStorage.setItem('routeDatas', JSON.stringify(routeData));
 							sessionStorage.setItem('user',this.loginForm.userName);
 							this.add_Routes(routeData);
+						}).catch( err => {
+							this.$message.error(err.toString());
+							this.isLoding = false;
 						})
 
 					} else {
