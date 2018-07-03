@@ -48,7 +48,7 @@
 					:index="index + ''"
 					:key="submenus.index" v-if="!submenus.hidden">
 					<template slot="title"><i :class="submenus.icon"></i>{{ submenus.title }}</template>
-					<el-menu-item v-for="(item, subIndex) in submenus.children"
+					<el-menu-item v-for="item in submenus.children"
 						:index="item.path" :key="item.path" >
 							{{item.title}}
 					</el-menu-item>
@@ -69,6 +69,10 @@
 				</el-breadcrumb>
 				
 			</el-header>
+			<el-container>
+				<router-view></router-view>
+			</el-container>
+			
 		</el-main>
 	</el-container>
 	
