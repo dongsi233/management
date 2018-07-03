@@ -57,7 +57,7 @@
 		</div>
 		<el-main>
 			<el-header>
-				<el-button type="primary" @click="toggleSiderbar">
+				<el-button type="primary" @click="toggleSiderbar" class="toggleSiderbar">
 					<i :class="isCollapse ? 'el-icon-d-arrow-right':'el-icon-d-arrow-left'" style="color:#fff"></i>
 				</el-button>
 				<el-breadcrumb separator-class="el-icon-arrow-right">
@@ -69,6 +69,15 @@
 				</el-breadcrumb>
 				
 			</el-header>
+			<!-- <el-tag v-for="tag in Array.from(tagArray)" :key="tag.name" type="tag.type" closable>
+				{{ tag.title }}
+			</el-tag> -->
+			<div class="tagNav">
+				<router-link ref="tag" v-for="tag in Array.from(tagArray)" :key="tag.path" :to="tag.path" @contextmenu.prevent.native="openMenu(tag, $event)">
+					{{ tag.name }}
+					<span class="el-icon-close" @click.prevent.stop="closeTag"></span>
+				</router-link>
+			</div>
 			<el-container>
 				<router-view></router-view>
 			</el-container>
@@ -97,9 +106,9 @@ export default {
 		}
 	},
 	beforeCreate () {
-		console.log(this.$router);
-		console.log(this.$route);
-		console.log(this.$router.options.routes);
+		// console.log(this.$router);
+		// console.log(this.$route);
+		// console.log(this.$router.options.routes);
 	},
 	created () {
 		this.user = sessionStorage.getItem('user');
@@ -111,20 +120,21 @@ export default {
 		getCount () {
 			return this.aa
 		},
-		// ...mapState({
-		// 		count: state => state.count
-		// })
 		...mapState([
-			'count'
+			'tagArray'
 		]),
 		...mapGetters([
 			'getRoutesLength'
 		]),
 		
 	},
+	mounted () {
+		this.addViewTag()
+	},
 	watch : {
 		$route () {
-			this.getBreadcrumb();
+			this.getBreadcrumb()
+			this.addViewTag()
 		}
 	},
 	methods: {
@@ -174,6 +184,22 @@ export default {
 			let match = this.$route.matched.filter( item => item.name )
 			match = [{path: '/', name:'首页'}].concat(match)
 			this.breadCrumbList = match
+		},
+		generateRoute () {
+			if(this.$route.name) {
+				return this.$route
+			}
+			return false
+		},
+		addViewTag () {
+			const route = this.generateRoute()
+			if (!route) {
+				return false
+			}
+			this.$store.dispatch('addVisitedTag', route)
+		},
+		openMenu (tag, e) {
+
 		}
 	},
 	beforeRouteLeave (to, from, next) {
@@ -185,10 +211,11 @@ export default {
 <style lang="scss" scoped>
 	//@import '~commonCss';
 	@import '~vars';
+
 	.siderbar {
 		overflow: hidden;
 		i {
-			font-size: 1em;
+			font-size: 2em;
 			margin-right: 25px;
 		}
 	}
@@ -205,7 +232,21 @@ export default {
 			color:#333;
 			padding-left: 0;
 			display: flex;
-			align-items: center;	
+			align-items: center;
+			border-bottom: 1px solid #ddd;
+			.toggleSiderbar {
+				margin-right: 20px;
+			}
+		}
+		.tagNav {
+			padding:10px;
+			display: flex;
+			a {
+				margin-right: 10px;
+				padding: 5px;
+				font-size: 12px;
+				border:1px solid #ddd;
+			}
 		}
 	}
 </style>

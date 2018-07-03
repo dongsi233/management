@@ -10,7 +10,8 @@ Vue.use(Vuex)
 const state = {
 	count:0,
 	Routers: [],
-	routeDatas: []
+	routeDatas: [],
+	tagArray: []
 }
 
 const getters = {
@@ -29,6 +30,12 @@ const mutations = {
 		menufilter(routes, addrouter);
 		router.addRoutes(routes);
 		router.push('/');
+	},
+	ADD_VISITED_TAG: (state, view) => {
+		if (state.tagArray.some( v => v.path === view.path)) return
+		state.tagArray.push(Object.assign({}, view, {
+			title: view.name || 'no-name'
+		}))
 	}
 }
 
@@ -40,6 +47,9 @@ const actions = {
 	},
 	add_Routesss ({commit}, addrouter) {
 		commit('ADD_ROUTES', addrouter);
+	},
+	addVisitedTag ( {commit}, view ) {
+		commit('ADD_VISITED_TAG', view)
 	}
 }
 

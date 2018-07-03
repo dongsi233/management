@@ -1,4 +1,5 @@
 import './waves.css'
+//import './waves.scss'
 
 export default {
     bind(el, binding) {
