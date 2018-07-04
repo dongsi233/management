@@ -34,7 +34,8 @@
             </css-doodle> 
         </el-card>
         
-    <loading :loadingRadiusVal="200" :dotRadiusVal="24" :dotNums="10"></loading>
+    <loading :dot-color-val="dotColor" :dot-nums="dotNums" :loading-radius-val="loadingRadius" :dot-radius-val="dotRadius" :style="changeStyle"></loading>
+    
     </div>
 </template>
 <script>
@@ -48,7 +49,24 @@ export default {
     },
     directives: {
         waves
-    }
+    },
+    data () {
+        return {
+            loadingRadius: 120, 
+            dotRadius: 15, 
+            dotColor: '#ff3366', 
+            dotNums: 12
+        }
+    },
+    computed: {
+        changeStyle: function() {
+            let rootEle = document.documentElement;
+            console.log(rootEle)
+            rootEle.style.setProperty('--loadingRadius', `${this.loadingRadius}px`)
+            rootEle.style.setProperty('--dotRadius', `${this.dotRadius}px`)
+            rootEle.style.setProperty('--dotColor', this.dotColor)
+        }
+    },
 }
 </script>
 <style lang="scss" scoped>

@@ -1,6 +1,7 @@
 <template>
     <div class="loading">
-        <div v-for="(dotNum, index) in dotNums" :key="index" :style="dotTransform(index, dotNums)">
+        <div v-for="(dotNum, index) in dotNums" :key="index" 
+            :style="dotTransform(index, dotNums)">
             <span :style="dotAimation(index, dotNums)"></span>
         </div>
     </div>
@@ -19,26 +20,18 @@ export default {
             required: true,
             default: 24
         },
-        // dotColorVal: {
-        //     type: String,
-        //     required: true,
-        //     default: '#d8d8d8'
-        // },
+        dotColorVal: {
+            type: String,
+            required: true,
+            default: '#d8d8d8'
+        },
         dotNums: {
             type: Number,
             required: true,
             default: 10
         }
     },
-    computed: {
-        changeStyle: function() {
-            let rootEle = document.documentElement;
-            console.log(rootEle)
-            rootEle.style.setProperty('--loadingRadius', `${this.loadingRadius}px`)
-            rootEle.style.setProperty('--dotRadius', `${this.dotRadius}px`)
-            rootEle.style.setProperty('--dotColor', this.dotColor)
-        }
-    },
+    
     methods: {
         dotTransform: function(index, dotNums) {
             let rad = 2 * Math.PI / dotNums  * index;
@@ -65,6 +58,7 @@ export default {
     }
 
     .loading{
+        margin:10px;
         position: relative;
         font-size: 0;
         border-radius: 50%;
